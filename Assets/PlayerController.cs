@@ -43,6 +43,7 @@ public class PlayerController : MonoBehaviour
       Debug.Log("JUMP!");
       rBody.AddForce(Vector2.up * jumpForce);
       hasReleasedJumpButton = false;
+      
     }
 
     if (Input.GetAxisRaw("Jump") == 0)
