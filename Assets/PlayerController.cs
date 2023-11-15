@@ -72,4 +72,16 @@ public class PlayerController : MonoBehaviour
     // Gizmos.color = Color.green;
     // Gizmos.DrawWireCube(Vector2.zero, Vector2.one);
   }
+
+
+
+
+
+  void OnTriggerEnter2D(Collider2D other) 
+  {
+    if(other.gameObject.tag == "enemy")
+      {
+        Debug.Log("game over");
+      }
+  }
 }

@@ -11,6 +11,8 @@ public class fiende : MonoBehaviour
     bool moveRight = true;
     [SerializeField]
     bool moveLeft = false;
+
+    private SpriteRenderer spriteRenderer;
     
     // Start is called before the first frame update
     void Start()
@@ -34,21 +36,24 @@ public class fiende : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other) 
     {
-        /*if(other.gameObject.tag == "ground" && moveRight == true)
-        {
-            moveLeft = true;
-            moveRight = false;
-            Debug.Log("left");
-        }*/
+        
         if(other.gameObject.tag == "ground" && moveLeft == false)
         {
             moveLeft = true;
             moveRight = false;
+            transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
         }
         else
         {
             moveRight = true;
             moveLeft = false;
+            transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+        }
+
+
+        if(other.gameObject.tag == "player")
+        {
+            Destroy(gameObject);
         }
 
     }
