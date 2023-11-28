@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -19,9 +20,27 @@ public class PlayerController : MonoBehaviour
   Rigidbody2D rBody;
   bool hasReleasedJumpButton = true;
 
+
+  [SerializeField]
+  int healthCurrent;
+
+  [SerializeField]
+  int healthMax = 3;
+
+  [SerializeField]
+  Slider healthBar;
+
   void Awake()
   {
     rBody = GetComponent<Rigidbody2D>();
+    
+  }
+
+  void Start ()
+  {
+    healthCurrent = healthMax;
+    healthBar.maxValue = healthMax;
+    healthBar.value = healthCurrent;
   }
 
   // Update is called once per frame
@@ -50,6 +69,9 @@ public class PlayerController : MonoBehaviour
     {
       hasReleasedJumpButton = true;
     }
+
+
+    
   }
 
   private Vector2 GetFootPosition()
@@ -81,7 +103,9 @@ public class PlayerController : MonoBehaviour
   {
     if(other.gameObject.tag == "enemy")
       {
-        Debug.Log("game over");
+        healthCurrent --;
+
+        healthBar.value = healthCurrent;
       }
   }
 }
