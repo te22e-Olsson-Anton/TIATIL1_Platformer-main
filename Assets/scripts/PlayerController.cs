@@ -30,6 +30,8 @@ public class PlayerController : MonoBehaviour
   [SerializeField]
   Slider healthBar;
 
+  private Vector3 checkpoint;
+
   void Awake()
   {
     rBody = GetComponent<Rigidbody2D>();
@@ -41,6 +43,8 @@ public class PlayerController : MonoBehaviour
     healthCurrent = healthMax;
     healthBar.maxValue = healthMax;
     healthBar.value = healthCurrent;
+
+    checkpoint = new Vector3(0, 0, 0);
   }
 
   // Update is called once per frame
@@ -70,7 +74,10 @@ public class PlayerController : MonoBehaviour
       hasReleasedJumpButton = true;
     }
 
-
+    if(healthCurrent==0)
+    {
+      Destroy(gameObject);
+    }
     
   }
 
@@ -107,5 +114,19 @@ public class PlayerController : MonoBehaviour
 
         healthBar.value = healthCurrent;
       }
+
+
+      if(other.gameObject.tag == "spike")
+        {
+            transform.position = checkpoint;
+            healthCurrent = 3;
+            healthBar.value = healthCurrent;
+        }
+
+
+        if(other.gameObject.tag == "checkPoint")
+        {
+          checkpoint = transform.position;
+        }
   }
 }
