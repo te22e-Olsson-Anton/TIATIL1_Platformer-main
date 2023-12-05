@@ -51,7 +51,7 @@ public class fiende : MonoBehaviour
         }
 
 
-        if(other.gameObject.tag == "player")
+        if(other.gameObject.tag == "player" || other.gameObject.tag == "bullet")
         {
             Destroy(gameObject);
         }

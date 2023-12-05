@@ -8,6 +8,10 @@ TagManager:
   - wall
   - enemy
   - player
+  - spike
+  - checkPoint
+  - bullet
+  - win
   layers:
   - Default
   - TransparentFX

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -20,6 +21,9 @@ public class PlayerController : MonoBehaviour
   Rigidbody2D rBody;
   bool hasReleasedJumpButton = true;
 
+  bool right = true;
+  bool left = false;
+
 
   [SerializeField]
   int healthCurrent;
@@ -31,6 +35,16 @@ public class PlayerController : MonoBehaviour
   Slider healthBar;
 
   private Vector3 checkpoint;
+
+  [SerializeField]
+  GameObject BulletH;
+  [SerializeField]
+  GameObject BulletV;
+
+  [SerializeField]
+    float timeBetweenShots = 0.5f;
+    float timeSinceLastShot = 0;
+
 
   void Awake()
   {
@@ -76,9 +90,32 @@ public class PlayerController : MonoBehaviour
 
     if(healthCurrent==0)
     {
-      Destroy(gameObject);
+        SceneManager.LoadScene(2);
     }
-    
+
+    timeSinceLastShot += Time.deltaTime;
+
+    if (Input.GetKey(KeyCode.D))
+    {
+      right = true;
+      left = false;
+    }
+    if (Input.GetKey(KeyCode.A))
+    {
+      left = true;
+      right = false;
+    }
+
+    if(Input.GetKey(KeyCode.E) && right == true && timeSinceLastShot > timeBetweenShots)
+    {
+        Instantiate(BulletH, transform.position, Quaternion.identity);
+        timeSinceLastShot = 0;
+    }
+    if(Input.GetKey(KeyCode.E) && left == true && timeSinceLastShot > timeBetweenShots)
+    {
+      Instantiate(BulletV, transform.position, Quaternion.identity);
+      timeSinceLastShot = 0;
+    }
   }
 
   private Vector2 GetFootPosition()
@@ -119,14 +156,20 @@ public class PlayerController : MonoBehaviour
       if(other.gameObject.tag == "spike")
         {
             transform.position = checkpoint;
-            healthCurrent = 3;
-            healthBar.value = healthCurrent;
+            
+            
         }
 
 
         if(other.gameObject.tag == "checkPoint")
         {
           checkpoint = transform.position;
+        }
+
+
+        if(other.gameObject.tag == "win")
+        {
+          SceneManager.LoadScene(3);
         }
   }
 }
