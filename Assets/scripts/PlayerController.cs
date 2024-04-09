@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
@@ -46,6 +47,24 @@ public class PlayerController : MonoBehaviour
     float timeSinceLastShot = 0;
 
 
+    public TMP_Text timerText;
+    private float startTime;
+    private bool isTimerRunning;
+
+
+
+
+    [SerializeField]
+    public class HighscoreEntry
+    {
+        public float time;
+    }
+
+    public TMP_Text highscoreText;
+
+    private List<HighscoreEntry> highscores = new List<HighscoreEntry>();
+    private const int maxHighscores = 5;
+
   void Awake()
   {
     rBody = GetComponent<Rigidbody2D>();
@@ -59,6 +78,11 @@ public class PlayerController : MonoBehaviour
     healthBar.value = healthCurrent;
 
     checkpoint = new Vector3(0, 0, 0);
+
+    startTime = Time.time;
+    isTimerRunning = true;
+
+    
   }
 
   // Update is called once per frame
@@ -116,6 +140,14 @@ public class PlayerController : MonoBehaviour
       Instantiate(BulletV, transform.position, Quaternion.identity);
       timeSinceLastShot = 0;
     }
+
+
+
+
+
+
+
+    
   }
 
   private Vector2 GetFootPosition()
@@ -169,7 +201,14 @@ public class PlayerController : MonoBehaviour
 
         if(other.gameObject.tag == "win")
         {
-          SceneManager.LoadScene(3);
+            SceneManager.LoadScene(3);
+    
         }
+
   }
+
+
+  
+
+   
 }
