@@ -16,6 +16,11 @@ public class score2 : MonoBehaviour
 
         highscore.text = highscore.text.Replace("New Text", "Ditt highscore är " + (Timer.elapsedTime / 1000) + " sek");
 
+        if(Timer.bestTime < Timer.elapsedTime)
+        {
+            Timer.elapsedTime = Timer.bestTime;
+        }
+
     }
 
     // Update is called once per frame
