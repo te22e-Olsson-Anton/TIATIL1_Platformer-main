@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/WinScreen.unity
     guid: 79623b464ec4e1e4badd5ea8ccb4446a
+  - enabled: 1
+    path: Assets/Scenes/Highscore.unity
+    guid: baf8a6af17232c14aab9da03366eafe7
   m_configObjects: {}

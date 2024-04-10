@@ -10,4 +10,14 @@ public class SceneSwitcher : MonoBehaviour
     {
         SceneManager.LoadScene(1);
     }
+
+    public void knappHighscore2()
+    {
+        SceneManager.LoadScene(4);
+    }
+
+    public void knappBackToMeny()
+    {
+        SceneManager.LoadScene(0);
+    }
 }

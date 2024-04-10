@@ -5,7 +5,9 @@ public class Timer : MonoBehaviour
 {
     public TMP_Text timerText;
 
-    private float elapsedTime;
+    public static float elapsedTime;
+
+    public static float bestTime;
 
     void Update()
     {

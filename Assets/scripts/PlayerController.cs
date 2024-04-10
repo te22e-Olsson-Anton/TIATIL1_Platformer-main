@@ -62,8 +62,7 @@ public class PlayerController : MonoBehaviour
 
     public TMP_Text highscoreText;
 
-    private List<HighscoreEntry> highscores = new List<HighscoreEntry>();
-    private const int maxHighscores = 5;
+    
 
   void Awake()
   {
